@@ -1,0 +1,12 @@
+graph TB
+  WidgetsService-->WidgetsComponent
+
+  WidgetsComponent-->WidgetsList
+
+  WidgetsList-->|"[widget]"|WidgetsComponent
+  WidgetsList-->WidgetsComponent
+  WidgetsList-->WidgetsDetails
+
+  WidgetsDetails-->WidgetsComponent
+  WidgetsDetails-->WidgetsComponent
+  WidgetsDetails-->WidgetsComponent

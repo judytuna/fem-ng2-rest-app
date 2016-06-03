@@ -20,10 +20,10 @@ import {WidgetDetail} from './widget-detail.component';
 
       <div class="">
         <widget-detail
+          [widget]="selectedWidget"
           (saved)="saveWidget(widget)"
           (cancelled)="resetWidget(widget)"
-          (goForIt)="goForItWidget(widget)"
-          [widget]="selectedWidget">
+          (goForIt)="goForItWidget(widget)">
           <pre>DEBUG: loading widget-detail...</pre>
         </widget-detail>
       </div>
