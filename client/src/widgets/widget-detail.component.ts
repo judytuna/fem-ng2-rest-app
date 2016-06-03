@@ -24,7 +24,7 @@ import {Widget} from './widgets.service';
               placeholder="Enter a gerund"
               class="" type="text">
           </div>
-          <button (click)="goForIt.emit(selectedwidget)">Go for it!</button>
+          <button (click)="goForIt.emit(selectedWidget)">Go for it!</button>
 
           <div class="">
             <label>Widget Color</label>
@@ -51,6 +51,7 @@ import {Widget} from './widgets.service';
 export class WidgetDetail {
   originalTitle: string;
   selectedWidget: Widget;
+
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
   @Output() goForIt = new EventEmitter();

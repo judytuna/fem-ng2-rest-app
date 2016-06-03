@@ -1,12 +1,13 @@
-graph TB
+graph TD
   WidgetsService-->WidgetsComponent
 
-  WidgetsComponent-->WidgetsList
+  WidgetsComponent-->|"[widgets] is a Widgets[]"|WidgetsList
+  WidgetsComponent-->|"set [widget] <br>is a function"|WidgetDetail
 
-  WidgetsList-->|"[widget]"|WidgetsComponent
-  WidgetsList-->WidgetsComponent
-  WidgetsList-->WidgetsDetails
+  WidgetsList-->|"(selected)"|WidgetsComponent
+  WidgetsList-->|"(deleted)"|WidgetsComponent
+  WidgetsList-->|"(performAction)?"|WidgetsDetail
 
-  WidgetsDetails-->WidgetsComponent
-  WidgetsDetails-->WidgetsComponent
-  WidgetsDetails-->WidgetsComponent
+  WidgetDetail-->|"(saved)"|WidgetsComponent
+  WidgetDetail-->|"(cancelled)"|WidgetsComponent
+  WidgetDetail-->|"(goForIt)?"|WidgetsComponent
