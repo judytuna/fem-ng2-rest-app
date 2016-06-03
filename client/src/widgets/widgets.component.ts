@@ -12,7 +12,7 @@ import {Component, OnInit} from '@angular/core';
     .widgets {
       margin: 28px 28px 0;
       padding: 16px;
-      background-color: orchid;
+      background-color: #FDDE86;
     }
   `]
 })
@@ -22,6 +22,6 @@ export class Widgets implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.tagline = "I'm a widgets tagline.  🦄"
+    this.tagline = "🚀 I'm a widgets tagline. 🦄"
   }
 }
