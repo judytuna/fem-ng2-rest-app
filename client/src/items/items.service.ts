@@ -17,6 +17,7 @@ export class ItemsService {
   constructor(private http: Http) {}
 
   loadItems() {
+    //noinspection TypeScriptUnresolvedFunction
     return this.http.get(BASE_URL)
       .map(res => res.json())
       .toPromise();
@@ -27,18 +28,21 @@ export class ItemsService {
   }
 
   createItem(item: Item) {
+    //noinspection TypeScriptUnresolvedFunction
     return this.http.post(`${BASE_URL}`, JSON.stringify(item), HEADER)
       .map(res => res.json())
       .toPromise();
   }
 
   updateItem(item: Item) {
+    //noinspection TypeScriptUnresolvedFunction
     return this.http.put(`${BASE_URL}${item.id}`, JSON.stringify(item), HEADER)
       .map(res => res.json())
       .toPromise();
   }
 
   deleteItem(item: Item) {
+    //noinspection TypeScriptUnresolvedFunction
     return this.http.delete(`${BASE_URL}${item.id}`)
       .map(res => res.json())
       .toPromise();
