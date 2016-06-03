@@ -20,12 +20,9 @@ import {Widget} from './widgets.service';
   `,
   styles: [`
     .widget {
-      margin: 28px;
+      margin: 28px 28px 28px 0;
       padding: 16px;
       background-color: #f8d9d9;
-    }
-    .widget + .widget {
-      margin-left: 0;
     }
   `]
 })

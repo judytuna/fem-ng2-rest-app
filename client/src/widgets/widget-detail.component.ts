@@ -4,44 +4,49 @@ import {Widget} from './widgets.service';
 @Component({
   selector: 'widget-detail',
   template: `
-  <div class="widget-card mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title">
-      <h2 class="mdl-card__title-text" *ngIf="selectedWidget.id">Editing {{originalTitle}}</h2>
-      <h2 class="mdl-card__title-text" *ngIf="!selectedWidget.id">Create New Widget</h2>
+  <div class="widget-card">
+    <div class="">
+      <h2 class="" *ngIf="selectedWidget.id">Editing {{originalTitle}}</h2>
+      <h2 class="" *ngIf="!selectedWidget.id">What would you like your new widget to do?</h2>
     </div>
-    <div class="mdl-card__supporting-text">
+    <div class="">
       <form novalidate>
-          <div class="mdl-textfield mdl-js-textfield">
+          <div class="">
             <label>Widget Title</label>
             <input [(ngModel)]="selectedWidget.title"
               placeholder="Enter a name"
-              class="mdl-textfield__input" type="text">
+              class="" type="text">
           </div>
 
-          <div class="mdl-textfield mdl-js-textfield">
+          <div class="">
             <label>Widget Action</label>
             <input [(ngModel)]="selectedWidget.actionType"
               placeholder="Enter a gerund"
-              class="mdl-textfield__input" type="text">
+              class="" type="text">
           </div>
-          <button (click)="goForIt.emit(selectedwidget)"></button>
+          <button (click)="goForIt.emit(selectedwidget)">Go for it!</button>
 
-          <div class="mdl-textfield mdl-js-textfield">
+          <div class="">
             <label>Widget Color</label>
             <input [(ngModel)]="selectedWidget.color"
               placeholder="Enter a color"
-              class="mdl-textfield__input" type="text">
+              class="" type="text">
           </div>
       </form>
     </div>
-    <div class="mdl-card__actions">
+    <div class="">
         <button type="submit" (click)="cancelled.emit(selectedWidget)"
-          class="mdl-button mdl-js-button mdl-js-ripple-effect">Cancel</button>
+          class="">Cancel</button>
         <button type="submit" (click)="saved.emit(selectedWidget)"
-          class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Save</button>
+          class="">Save</button>
     </div>
   </div>
-  `
+  `,
+  styles: [`
+    h2 {
+      font-size: 20px;
+    }
+  `]
 })
 export class WidgetDetail {
   originalTitle: string;

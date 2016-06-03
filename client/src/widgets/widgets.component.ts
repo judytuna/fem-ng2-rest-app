@@ -6,26 +6,29 @@ import {WidgetDetail} from './widget-detail.component';
 @Component({
   selector: 'widgets',
   template: `
-  <div class="widgets"
-       *ngIf="tagline">
-    {{ tagline }}
-  </div>
-  <widgets-list
-    [widgets]="widgets"
-    (selected)="selectWidget($event)"
-    (deleted)="deleteWidget(widget)"
-    (goForIt)="goForItWidget(widget)">
-    <pre>loading widgets-list</pre>
-  </widgets-list>
+  <div class="widgets">
+    <div *ngIf="tagline">
+      {{ tagline }}
+    </div>
+    <div class="widgets-display">
+      <widgets-list
+        [widgets]="widgets"
+        (selected)="selectWidget($event)"
+        (deleted)="deleteWidget(widget)">
+        <pre>loading widgets-list</pre>
+      </widgets-list>
 
-  <div class="mdl-cell mdl-cell--6-col">
-    <widget-detail
-      (saved)="saveWidget(widget)"
-      (cancelled)="resetWidget(widget)"
-      [widget]="selectedWidget">
-      <pre>DEBUG: loading widget-detail...</pre>
-    </widget-detail>
-   </div>
+      <div class="">
+        <widget-detail
+          (saved)="saveWidget(widget)"
+          (cancelled)="resetWidget(widget)"
+          (goForIt)="goForItWidget(widget)"
+          [widget]="selectedWidget">
+          <pre>DEBUG: loading widget-detail...</pre>
+        </widget-detail>
+      </div>
+    </div>
+  </div>
   `,
   styles: [`
     .widgets {
@@ -33,8 +36,15 @@ import {WidgetDetail} from './widget-detail.component';
       padding: 16px;
       background-color: #FDDE86;
     }
-    widgets-list {
+    .widgets-display {
       display: flex;
+    }
+    widgets-list {
+      width: 80%;
+      display: flex;
+    }
+    widget-detail {
+      width: 20%;
     }
   `],
   providers: [WidgetsService],
@@ -95,5 +105,9 @@ export class WidgetsComponent implements OnInit {
     // Generally, we would want to wait for the result of `widgetsService.deleteWidget`
     // before resetting the current widget.
     this.resetWidget();
+  }
+
+  goForItWidget(widget: Widget) {
+    this.widgetsService.doTheThing(widget);
   }
 }

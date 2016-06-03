@@ -74,4 +74,10 @@ export class WidgetsService {
       .map(res => res.json())
       .toPromise();
   }
+
+  doTheThing(widget: Widget) {
+    if(widget) {
+      alert("Hey! Your " + widget.title + " is " + widget.actionType + " away!");
+    }
+  }
 }
