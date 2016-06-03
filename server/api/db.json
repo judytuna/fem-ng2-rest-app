@@ -7,13 +7,13 @@
     },
     {
       "id": 2,
-      "name": "Item 2",
-      "description": "This is a description"
+      "name": "Frank",
+      "description": "On the west coast."
     },
     {
       "id": 3,
-      "name": "Item 3",
-      "description": "This is a lovely item"
+      "name": "Earnest",
+      "description": "On the east coast."
     },
     {
       "name": "Gadget",

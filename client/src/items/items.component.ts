@@ -2,7 +2,7 @@ import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {ItemsService, Item} from './items.service';
 import {ItemsList} from './items-list.component';
 import {ItemDetail} from './item-detail.component';
-import {Widgets} from '../widgets/widgets.component'
+import {WidgetsComponent} from '../widgets/widgets.component'
 
 @Component({
   selector: 'items',
@@ -29,7 +29,7 @@ import {Widgets} from '../widgets/widgets.component'
     }
   `],
   providers: [ItemsService],
-  directives: [ItemsList, ItemDetail, Widgets]
+  directives: [ItemsList, ItemDetail, WidgetsComponent]
 })
 export class Items implements OnInit {
   items: Array<Item>;

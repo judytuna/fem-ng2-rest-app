@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {WidgetsService, Widget} from './widgets.service';
+import {WidgetsList} from './widgets-list.component';
 
 @Component({
   selector: 'widgets',
@@ -7,6 +9,7 @@ import {Component, OnInit} from '@angular/core';
        *ngIf="tagline">
     {{ tagline }}
   </div>
+  <widgets-list [widgets]="widgets"></widgets-list>
   `,
   styles: [`
     .widgets {
@@ -14,14 +17,22 @@ import {Component, OnInit} from '@angular/core';
       padding: 16px;
       background-color: #FDDE86;
     }
-  `]
+    widgets-list {
+      display: flex;
+    }
+  `],
+  providers: [WidgetsService],
+  directives: [WidgetsList]
 })
-export class Widgets implements OnInit {
+export class WidgetsComponent implements OnInit {
   tagline: string;
+  widgets: Array<Widget>;
+  selectedWidget: Widget;
 
-  constructor() {}
+  constructor(private widgetsService: WidgetsService) {}
 
   ngOnInit() {
-    this.tagline = "🚀 I'm a widgets tagline. 🦄"
+    this.tagline = "🚀 I'm a widgets tagline. 🦄";
+    this.widgets = this.widgetsService.loadWidgets();
   }
 }
