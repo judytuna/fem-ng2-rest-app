@@ -8,8 +8,14 @@ import {Widget} from './widgets.service';
          (click)="selected.emit(widget)"
          class="widget">
       <div class="title">{{widget.title}}</div>
-      <div class="action-type">{{widget.actionType}}</div>
+      <div class="action-type">
+        <button
+          (click)="performAction.emit(widget); $event.stopPropagation();">
+          Start {{widget.actionType}}!
+        </button>
+      </div>
       <div class="color">{{widget.color}}</div>
+      <button (click)="selected.emit(widget)">Edit</button>
     </div>
   `,
   styles: [`

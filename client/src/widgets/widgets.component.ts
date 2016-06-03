@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetsService, Widget} from './widgets.service';
 import {WidgetsList} from './widgets-list.component';
+import {WidgetDetail} from './widget-detail.component';
 
 @Component({
   selector: 'widgets',
@@ -9,7 +10,22 @@ import {WidgetsList} from './widgets-list.component';
        *ngIf="tagline">
     {{ tagline }}
   </div>
-  <widgets-list [widgets]="widgets"></widgets-list>
+  <widgets-list
+    [widgets]="widgets"
+    (selected)="selectWidget($event)"
+    (deleted)="deleteWidget(widget)"
+    (goForIt)="goForItWidget(widget)">
+    <pre>loading widgets-list</pre>
+  </widgets-list>
+
+  <div class="mdl-cell mdl-cell--6-col">
+    <widget-detail
+      (saved)="saveWidget(widget)"
+      (cancelled)="resetWidget(widget)"
+      [widget]="selectedWidget">
+      <pre>DEBUG: loading widget-detail...</pre>
+    </widget-detail>
+   </div>
   `,
   styles: [`
     .widgets {
@@ -22,7 +38,7 @@ import {WidgetsList} from './widgets-list.component';
     }
   `],
   providers: [WidgetsService],
-  directives: [WidgetsList]
+  directives: [WidgetsList, WidgetDetail]
 })
 export class WidgetsComponent implements OnInit {
   tagline: string;
@@ -34,5 +50,50 @@ export class WidgetsComponent implements OnInit {
   ngOnInit() {
     this.tagline = "🚀 I'm a widgets tagline. 🦄";
     this.widgets = this.widgetsService.loadWidgets();
+  }
+
+  resetWidget() {
+    let emptyWidget: Widget = {id: null, title: '', actionType: '', color: ''};
+    this.selectedWidget = emptyWidget;
+  }
+
+  selectWidget(widget: Widget) {
+    this.selectedWidget = widget;
+  }
+
+  saveWidget(widget: Widget) {
+    this.widgetsService.saveWidget(widget)
+      .then(responseWidget => {
+        if (widget.id) {
+          this.replaceWidget(responseWidget);
+        } else {
+          this.pushWidget(responseWidget);
+        }
+      });
+
+    // Generally, we would want to wait for the result of `widgetsService.saveWidget`
+    // before resetting the current widget.
+    this.resetWidget();
+  }
+
+  replaceWidget(widget: Widget) {
+    this.widgets = this.widgets.map(mapWidget => {
+      return mapWidget.id === widget.id ? widget : mapWidget;
+    });
+  }
+
+  pushWidget(widget: Widget) {
+    this.widgets.push(widget);
+  }
+
+  deleteWidget(widget: Widget) {
+    this.widgetsService.deleteWidget(widget)
+      .then(() => {
+        this.widgets.splice(this.widgets.indexOf(widget), 1);
+      });
+
+    // Generally, we would want to wait for the result of `widgetsService.deleteWidget`
+    // before resetting the current widget.
+    this.resetWidget();
   }
 }
